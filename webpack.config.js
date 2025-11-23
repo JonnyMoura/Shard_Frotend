@@ -9,8 +9,10 @@ module.exports = {
     output: {
         filename: isProduction ? '[name].[contenthash].js' : '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true, // Clean dist folder before each build
+        clean: true,
         chunkFilename: isProduction ? '[name].[contenthash].chunk.js' : '[name].chunk.js',
+        // ADDED: Set publicPath for GitHub Pages
+        publicPath: isProduction ? '/sound-particle-visualization/' : '/', // Replace with your repo name
     },
     optimization: {
         splitChunks: {
@@ -47,7 +49,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        cacheDirectory: true, // Enable babel caching
+                        cacheDirectory: true,
                     }
                 }
             },
@@ -56,8 +58,8 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|jpg|gif|mp3)$/,
-                type: 'asset/resource', // Use webpack 5 asset modules instead of file-loader
+                test: /\.(png|jpg|gif|mp3|svg|ico)$/,
+                type: 'asset/resource',
                 generator: {
                     filename: 'assets/[name].[hash][ext]',
                 },
@@ -66,12 +68,14 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './index.html', // Path to your index.html
+            template: './index.html',
+            // ADDED: Inject favicon
+            favicon: './public/Shard.ico'
         }),
     ],
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'public'), // Serve static files from 'public'
+            directory: path.resolve(__dirname, 'public'),
         },
         compress: true,
         port: 9000,
@@ -83,11 +87,11 @@ module.exports = {
         extensions: ['.js'],
     },
     performance: {
-        maxAssetSize: 1000000, // 1MB - increased for Three.js
-        maxEntrypointSize: 1000000, // 1MB
-        hints: isProduction ? 'warning' : false, // Only show warnings in production
+        maxAssetSize: 1000000,
+        maxEntrypointSize: 1000000,
+        hints: isProduction ? 'warning' : false,
     },
     cache: {
-        type: 'filesystem', // Enable persistent caching for faster rebuilds
+        type: 'filesystem',
     },
 };
