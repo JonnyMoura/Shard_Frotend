@@ -11,8 +11,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         clean: true,
         chunkFilename: isProduction ? '[name].[contenthash].chunk.js' : '[name].chunk.js',
-        // ADDED: Set publicPath for GitHub Pages
-        publicPath: isProduction ? '/sound-particle-visualization/' : '/', // Replace with your repo name
+        // FIXED: Match your actual GitHub Pages repository name
+        publicPath: isProduction ? '/Shard_Frotend/' : '/',
     },
     optimization: {
         splitChunks: {
@@ -69,7 +69,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './index.html',
-            // ADDED: Inject favicon
             favicon: './public/Shard.ico'
         }),
     ],
