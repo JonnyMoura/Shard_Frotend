@@ -38,7 +38,7 @@ export class PythonCommunication {
             
             this.websocket.onopen = () => {
                 console.log('✅ Connected to Python evolution engine');
-                this.updateConnectionStatus('connected');
+                this.updateConnectionStatus('connected!');
             };
             
             this.websocket.onmessage = (event) => {
