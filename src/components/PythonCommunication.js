@@ -34,7 +34,7 @@ export class PythonCommunication {
     connectToPython() {
         try {
             console.log('🐍 Attempting to connect to Python WebSocket server at ws://meu-teste.loca.lt/');
-            this.websocket = new WebSocket('ws://meu-teste.loca.lt/');
+            this.websocket = new WebSocket('wss://parodistically-nonfluidic-clarice.ngrok-free.dev');
             
             this.websocket.onopen = () => {
                 console.log('✅ Connected to Python evolution engine');
